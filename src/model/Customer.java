@@ -11,8 +11,12 @@ public class Customer {
     private final Pattern pattern = Pattern.compile(emailRegEx);
 
     public Customer(String firstName, String lastName, String email){
-        if(!pattern.matcher(email).matches()){
-            throw new IllegalArgumentException("Error, Invalid email.");
+        try{
+            if(!pattern.matcher(email).matches()){
+                throw new IllegalArgumentException("Error, Invalid email.");
+            }
+        }catch (Exception exception){
+            exception.printStackTrace();
         }
         this.firstName = firstName;
         this.lastName = lastName;

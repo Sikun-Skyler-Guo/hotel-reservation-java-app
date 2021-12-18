@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class MainMenu {
     private final Scanner scanner = new Scanner(System.in);
@@ -121,22 +122,41 @@ public class MainMenu {
 
         for (Reservation reservation: reservations){
             System.out.println(reservation);
+            System.out.println("============================================");
         }
     }
 
     private void createAnAccount(){
-        System.out.println("Enter your email: ");
-        String email = scanner.nextLine();
+        final String emailRegEx = "^(.+)@(.+).com$";
+        final Pattern pattern = Pattern.compile(emailRegEx);
+        boolean correct_email_format = false;
+        while(!correct_email_format) {
+            System.out.println("Enter your email: ");
+            String email = scanner.nextLine();
+            try {
+                if (!pattern.matcher(email).matches()) {
+                    throw new IllegalArgumentException("Error, Invalid email.");
+                }else if (){
 
-        System.out.println("Enter your first name: ");
-        String firstName = scanner.nextLine();
+                }
+                System.out.println("Enter your first name: ");
+                String firstName = scanner.nextLine();
 
-        System.out.println("Enter your last name: ");
-        String lastName = scanner.nextLine();
+                System.out.println("Enter your last name: ");
+                String lastName = scanner.nextLine();
 
-        HotelResource.createACustomer(email, firstName, lastName);
-        System.out.println("Welcome " + firstName + lastName + ", your account has been created.");
-        System.out.println("============================================");
+                HotelResource.createACustomer(email, firstName, lastName);
+                System.out.println("Welcome " + firstName + " " + lastName + ", your account has been created.");
+                System.out.println("============================================");
+                correct_email_format = true;
+            } catch (Exception exception) {
+                System.out.println("Illegal argument > " + exception.getMessage() + "Please enter a correct email form.");
+            }
+
+
+
+
+        }
     }
 
     private static void openAdministratorMenu(){
