@@ -136,9 +136,8 @@ public class MainMenu {
             try {
                 if (!pattern.matcher(email).matches()) {
                     throw new IllegalArgumentException("Error, Invalid email.");
-                }else if (){
-
                 }
+
                 System.out.println("Enter your first name: ");
                 String firstName = scanner.nextLine();
 
